@@ -3,12 +3,12 @@ export default {
   logsChannelId: "1505211415886041182",
 
   moderatorRoles: [
-    "Mod Test",
-    "Admin"
+    "1461483094929313910",
+    "1505986543578255501"
   ],
 
   escalatorRoles: [
-    "Guide Test",
-    "Admin"
+    "1505986595642147019",
+    "1461483094929313910"
   ]
 };
