@@ -69,13 +69,27 @@ export default {
       const reason =
         interaction.fields.getTextInputValue("reason");
 
-      const channel = interaction.channel;
+let message = null;
 
-      if (!channel || channel.type !== ChannelType.GuildText) {
-        return;
-      }
+const channels = await interaction.guild!.channels.fetch();
 
-      const message = await channel.messages.fetch(messageId);
+for (const [, ch] of channels) {
+  if (!ch || !ch.isTextBased()) continue;
+
+  try {
+    message = await ch.messages.fetch(messageId);
+    if (message) break;
+  } catch {
+    continue;
+  }
+}
+
+if (!message) {
+  return interaction.reply({
+    content: "Message not found in this server.",
+    ephemeral: true
+  });
+}
 
       const escalationChannel =
         await interaction.guild?.channels.fetch(
